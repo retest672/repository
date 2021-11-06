@@ -36,7 +36,6 @@ jobs:
         brew update
         brew outdated
         brew upgrade
-        brew doctor
         brew list
   MacOS:
     # The type of runner that the job will run on
@@ -51,5 +50,4 @@ jobs:
         brew update
         brew outdated
         brew upgrade
-        brew doctor
         brew list
