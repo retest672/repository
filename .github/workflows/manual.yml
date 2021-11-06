@@ -33,9 +33,11 @@ jobs:
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         sudo apt-get install build-essential
         brew install gcc
+        cd /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core && git stash pop
         brew update
         brew outdated
         brew upgrade
+        brew doctor
         brew list
   MacOS:
     # The type of runner that the job will run on
@@ -50,4 +52,5 @@ jobs:
         brew update
         brew outdated
         brew upgrade
+        brew doctor
         brew list
