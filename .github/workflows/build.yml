@@ -1,20 +1,10 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Install and Test 3rd Party Package Installers
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
-on:
-  workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
+on: workflow_dispatch
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -26,7 +16,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Setup Homebrew
+    - name: Setup and Test Homebrew
+      shell: pwsh
       run: |
         sudo apt-get purge build-essential
         sudo apt-get update
@@ -41,6 +32,7 @@ jobs:
         brew outdated
         brew upgrade
         brew list
+        brew install gh
   MacOS:
     # The type of runner that the job will run on
     runs-on: macos-latest
@@ -48,20 +40,24 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Setup Homebrew
+    - name: Setup and Test Homebrew
+      shell: bash
       run: |
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -y
         brew update
         brew outdated
         brew upgrade
         brew list
+        brew install gh
   Windows:
     runs-on: windows-latest
     steps:
-    - name: Setup Chocolatey
+    - name: Setup and Test Chocolatey
       shell: pwsh
       run: |
         Get-ExecutionPolicy
         Set-ExecutionPolicy Bypass -Scope Process
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
         choco upgrade chocolatey
+        choco
+        choco install gh
