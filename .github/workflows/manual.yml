@@ -30,6 +30,7 @@ jobs:
       run: |
         sudo apt-get purge build-essential
         sudo apt-get update
+        sudo apt-get upgrade
         sudo apt-get install --reinstall build-essential
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -y
         echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/runner/.bash_profile
