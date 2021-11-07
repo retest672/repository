@@ -28,7 +28,9 @@ jobs:
     # Runs a single command using the runners shell
     - name: Setup Homebrew
       run: |
+        sudo apt-get purge build-essential
         sudo apt-get install --reinstall build-essential
+        sudo apt-get update
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -y
         echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/runner/.bash_profile
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
