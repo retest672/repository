@@ -17,7 +17,6 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Setup and Test Homebrew
-      shell: pwsh
       run: |
         sudo apt-get purge build-essential
         sudo apt-get update
