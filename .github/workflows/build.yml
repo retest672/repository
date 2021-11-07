@@ -26,12 +26,12 @@ jobs:
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -y
         echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/runner/.bash_profile
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        brew install gcc
+        brew reinstall gcc
         brew update
         brew outdated
         brew upgrade
         brew list
-        brew install gh
+        brew reinstall gh
   MacOS:
     # The type of runner that the job will run on
     runs-on: macos-latest
@@ -47,5 +47,5 @@ jobs:
         brew outdated
         brew upgrade
         brew list
-        brew install gh
+        brew reinstall gh
   
