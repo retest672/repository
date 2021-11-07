@@ -60,5 +60,5 @@ jobs:
         choco upgrade chocolatey
         choco
         RefreshEnv
-        choco install gh
+        choco install gh --install-arguments="'/l*v c:\gh_msi_install.log
         RefreshEnv
