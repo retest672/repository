@@ -36,9 +36,31 @@ jobs:
     - name: Test Homebrew
       run: |
         brew reinstall gh
-  MacOS:
+  MacOS-ARM:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: macos-11
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Setup Homebrew
+      shell: bash
+      run: |
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -y
+    - name: Fix and Upgrade Homebrew
+      shell: bash
+      run: |
+        brew update
+        brew outdated
+        brew upgrade
+        brew list
+    - name: Test Homebrew
+      shell: bash
+      run: |
+        brew reinstall gh
+  MacOS-Intel:
+    # The type of runner that the job will run on
+    runs-on: macos-10.15
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
