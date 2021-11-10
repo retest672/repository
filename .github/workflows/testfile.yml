@@ -1,0 +1,61 @@
+# This is a basic workflow that is manually triggered
+
+name: Install and Test 3rd Party Package Installers
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on: workflow_dispatch
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  Linux:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Setup Homebrew
+      run: |
+        sudo apt-get purge build-essential
+        sudo apt-get update
+        sudo apt-get upgrade
+        sudo apt-get install --reinstall r-base-dev
+        sudo apt-get install --reinstall build-essential
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -y
+        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/runner/.bash_profile
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        brew reinstall gcc
+    - name: Fix and Upgrade Homebrew
+      run: |
+        brew update
+        brew outdated
+        brew upgrade
+        brew list
+    - name: Test Homebrew
+      run: |
+        brew reinstall gh
+  MacOS:
+    # The type of runner that the job will run on
+    runs-on: macos-11
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Setup Homebrew
+      shell: bash
+      run: |
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -y
+    - name: Fix and Upgrade Homebrew
+      shell: bash
+      run: |
+        brew update
+        brew outdated
+        brew upgrade
+        brew list
+    - name: Test Homebrew
+      shell: bash
+      run: |
+        brew reinstall gh
+  
