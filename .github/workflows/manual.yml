@@ -27,4 +27,8 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: shutdown /r
+      run: |
+        wsl --install
+        shutdown /r
+        RefreshEnv
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
