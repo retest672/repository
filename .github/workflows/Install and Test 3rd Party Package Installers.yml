@@ -27,6 +27,15 @@ jobs:
         echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/runner/.bash_profile
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         brew reinstall gcc
+    - name: Fix and Upgrade Homebrew
+      run: |
+        brew update
+        brew outdated
+        brew upgrade
+        brew list
+    - name: Test Homebrew
+      run: |
+        brew reinstall gh
   Linux-2018-LTS:
     # The type of runner that the job will run on
     runs-on: ubuntu-18.04
